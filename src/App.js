@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container, AppBar, Typography } from '@material-ui/core';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ss from './images/ss.png';
+import useStyles from './styles';
+
+const App = () => {
+    const classes = useStyles();
+
+    return (
+        <Container maxWidth="lg">
+            <AppBar className={classes.appBar} position="static" color="inherit">
+                <Typography className={classes.heading} variant="h2" align="center">Share&Study</Typography>
+                <img className={classes.image} src={ss} alt="ss" height="120" />
+            </AppBar> 
+        </Container>
+
+    );
 }
 
 export default App;
