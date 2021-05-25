@@ -1,21 +1,31 @@
-import React from 'react';
-import { Container, AppBar, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import ss from './images/ss.png';
-import useStyles from './styles';
+// switch,route
 
-const App = () => {
-    const classes = useStyles();
+import Navbar from './components/Navbar/Navbar';
+import Auth from './components/Navbar/Auth/Auth';
+import Home from './components/Home/Home';
 
-    return (
-        <Container maxWidth="lg">
-            <AppBar className={classes.appBar} position="static" color="inherit">
-                <Typography className={classes.heading} variant="h2" align="center">Share&Study</Typography>
-                <img className={classes.image} src={ss} alt="ss" height="120" />
-            </AppBar> 
-        </Container>
 
-    );
-}
+const App = () => (
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch();
+    }, [dispatch]);
+
+    <BrowserRouter>
+      <Container maxWidth="lg">
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/auth" exact component={Auth} />
+        </Switch>
+      </Container>
+    </BrowserRouter>
+);
 
 export default App;
