@@ -23,11 +23,11 @@ const Auth = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       if (isSignup) {
-        dispatchEvent(signup(formData,history))
+        dispatch(signup(formData,history))
       } else {
-        dispatchEvent(signin(formData,history))
+        dispatch(signin(formData,history))
       }
-    }
+    };
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +36,7 @@ const Auth = () => {
 
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
-        handleShowPassword(false);
+        setShowPassword(false);
     };
 
     return (
@@ -71,7 +71,7 @@ const Auth = () => {
             </form>
          </Paper>
      </Container>
-    )
-}
+    );
+};
 
-export default Auth
+export default Auth;

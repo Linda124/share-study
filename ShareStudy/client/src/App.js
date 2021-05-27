@@ -6,16 +6,12 @@ import { useDispatch } from 'react-redux';
 // switch,route
 
 import Navbar from './components/Navbar/Navbar';
-import Auth from './components/Navbar/Auth/Auth';
+//import Auth from './components/Navbar/Auth/Auth';
 import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
 
 
 const App = () => (
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch();
-    }, [dispatch]);
 
     <BrowserRouter>
       <Container maxWidth="lg">
