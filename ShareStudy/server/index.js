@@ -15,6 +15,10 @@ app.use(cors());
 
 app.use("/user", userRouter);
 
+app.get('/', (req, res) => {
+  res.send('Hello to shareandstudy');
+});
+
 //const CONNECTION_URL =  'mongodb+srv://neha-5678:linehanus2645s&s@cluster0.5hiaa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 const PORT = process.env.PORT|| 5000;
