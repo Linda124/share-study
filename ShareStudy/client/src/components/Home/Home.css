@@ -1,0 +1,27 @@
+.home {
+    max-width: 1300px;
+    margin: 1rem auto;
+}
+
+.home__courses {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1232px) {
+    .home__courses {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 950px) {
+    .home__courses {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 630px) {
+    .home__courses {
+        grid-template-columns: 1fr;
+    }
+}
