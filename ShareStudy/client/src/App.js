@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container } from '@material-ui/core';
+import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -18,6 +18,7 @@ const App = () => (
     <BrowserRouter>
       <Container maxWidth="lg">
         <Navbar />
+        
         <main>
         <Switch>
           <Route exact path="/" exact component={Home} />

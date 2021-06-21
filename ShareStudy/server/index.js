@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import userRouter from "./routes/user.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import cs2030sReviewsRoutes from "./routes/cs2030sReviews.js";
 
 const app = express();
 dotenv.config();
@@ -14,7 +15,10 @@ const connectDB = async () => {
     await mongoose.connect(process.env.CONNECTION_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false,
     });
+
+    //mongoose.set('useFindAndModify', false);
 
     console.log("MongoDB connection SUCCESS");
   } catch (error) {
@@ -24,6 +28,7 @@ const connectDB = async () => {
 };
 connectDB();
 
+
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
@@ -31,6 +36,7 @@ app.use(cors());
 
 app.use("/user", userRouter);
 app.use('/courses',courseRoutes);
+app.use('/CS2030Sreviews', cs2030sReviewsRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello to share&study');

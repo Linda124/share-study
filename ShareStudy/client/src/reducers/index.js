@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
+import reviews from './reviews';
+
 import {
     getCoursesReducer,
     getCourseDetailsReducer,
@@ -12,5 +14,6 @@ export const reducers = combineReducers({
     auth,
     getCourses: getCoursesReducer,
     getCourseDetails: getCourseDetailsReducer,
+    reviews,
 });
 
