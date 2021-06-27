@@ -18,15 +18,14 @@ const App = () => (
     <BrowserRouter>
       <Container maxWidth="lg">
         <Navbar />
-        
         <main>
-        <Switch>
-          <Route exact path="/" exact component={Home} />
-          <Route exact path="/course/60c04d7d337731fe418ee112" component={MiddlePageCS2030S} />
-          <Route exact path="/CS2030Snotes" component={NotePageCS2030s} />
-          <Route exact path="/CS2030Sreviews" component={ModuleReviewsCS2030s} />
-          <Route exact path="/auth" exact component={Auth} />
-        </Switch>
+          <Switch>
+            <Route exact path="/" exact component={Home} />
+            <Route exact path="/course/60c04d7d337731fe418ee112" component={MiddlePageCS2030S} />
+            <Route exact path="/CS2030Snotes" component={NotePageCS2030s} />
+            <Route exact path="/CS2030Sreviews" component={ModuleReviewsCS2030s} />
+            <Route exact path="/auth" exact component={Auth} />
+          </Switch>
         </main>
       </Container>
     </BrowserRouter>

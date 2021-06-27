@@ -17,7 +17,7 @@ export const getCS2030sReviews = async (req, res) => {
 export const createCS2030sReviews = async (req, res) => {
     const cs2030sReview = req.body;
 
-    const newcs2030sReviewsMessage = new cs2030sReviewsMessage(cs2030sReview);
+    const newcs2030sReviewsMessage = new cs2030sReviewsMessage({ ...cs2030sReview, creator: req.userId, createdAt: new Date().toISOString() });
 
     try {
         await newcs2030sReviewsMessage.save();
@@ -54,11 +54,22 @@ export const deleteCS2030sReview = async (req, res) => {
 export const likeCS2030sReview = async (req, res) => {
     const { id } = req.params;
 
+    if(!req.userId) return res.json({ message: 'Unauthenticated' });
+
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No review with that id`);
     
     const review = await cs2030sReviewsMessage.findById(id);
 
-    const updatedReview = await cs2030sReviewsMessage.findByIdAndUpdate(id, { likeCount: review.likeCount + 1 }, { new: true });
+    const index = review.likes.findIndex((id) => id === String(req.userId));
+
+    if(index === -1) {
+        // like the post
+        review.likes.push(req.userId);
+    } else {
+        review.likes = review.likes.filter((id) => id !== String(req.userId));
+    }
+
+    const updatedReview = await cs2030sReviewsMessage.findByIdAndUpdate(id, review, { new: true });
     
     res.json(updatedReview);
 }

@@ -7,10 +7,11 @@ import { useSelector } from 'react-redux';
 import { createReview, updateReview } from '../../actions/reviews.js';
 
 const Form = ({ currentId, setCurrentId}) => {
-    const [reviewData, setReviewData] = useState({creator: '', title: '', message: '', tags: '', selectedFile: '', });
+    const [reviewData, setReviewData] = useState({title: '', message: '', tags: '', selectedFile: '', });
     const review = useSelector((state) => (currentId ? state.reviews.find((message) => message._id === currentId) : null));
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         if(review) setReviewData(review);
@@ -20,24 +21,35 @@ const Form = ({ currentId, setCurrentId}) => {
         e.preventDefault();
 
         if(currentId) {
-            dispatch(updateReview(currentId, reviewData));
+            dispatch(updateReview({ ...reviewData, name: user?.result?.name }));
         } else {
-            dispatch(createReview(reviewData));
+            dispatch(createReview({ ...reviewData, name: user?.result?.name }));
         }
         clear();
     }
 
     const clear = () => {
         setCurrentId(null);
-        setReviewData({creator: '', title: '', message: '', tags: '', selectedFile: '' });
+        setReviewData({ title: '', message: '', tags: '', selectedFile: '' });
         
       };
+    
+      if (!user?.result?.name) {
+        return (
+          <Paper className={classes.paper}>
+            <Typography variant="h6" align="center">
+              Please Sign In to create your own reviews and like others' reviews.
+            </Typography>
+          </Paper>
+        );
+      }
+
+    
 
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
             <Typography variant="h6">{currentId ? 'Editing' : 'Creating' } a Review</Typography>
-            <TextField name="creator" variant="outlined" label="Creator" fullWidth value={reviewData.creator} onChange={(e) => setReviewData({ ...reviewData, creator: e.target.value })}/>
             <TextField name="title" variant="outlined" label="Title" fullWidth value={reviewData.title} onChange={(e) => setReviewData({ ...reviewData, title: e.target.value })}/>
             <TextField name="message" variant="outlined" label="Message" fullWidth value={reviewData.message} onChange={(e) => setReviewData({ ...reviewData, message: e.target.value })}/>
             <TextField name="tags" variant="outlined" label="Tags" fullWidth value={reviewData.tags} onChange={(e) => setReviewData({ ...reviewData, tags: e.target.value })}/>
