@@ -6,7 +6,10 @@ import cs2030sReviewsMessage from '../models/cs2030sReviewsMessage.js'
 export const getCS2030sReviews = async (req, res) => {
     try {
         const cs2030sMessages = await cs2030sReviewsMessage.find();
-
+        const sortedByCreationDate = cs2030sMessages.sort(
+            (a, b) => b.createdAt - a.createdAt
+        );
+        res.send(sortedByCreationDate);
         res.status(200).json(cs2030sMessages);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -49,7 +52,7 @@ export const deleteCS2030sReview = async (req, res) => {
 
     res.json({ message: "Review deleted successfully." });
 }
-
+                                                                                 
 
 export const likeCS2030sReview = async (req, res) => {
     const { id } = req.params;
@@ -71,5 +74,5 @@ export const likeCS2030sReview = async (req, res) => {
 
     const updatedReview = await cs2030sReviewsMessage.findByIdAndUpdate(id, review, { new: true });
     
-    res.json(updatedReview);
+    res.status(200).json(updatedReview);
 }

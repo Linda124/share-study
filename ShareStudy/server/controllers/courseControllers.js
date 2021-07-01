@@ -22,3 +22,4 @@ export const getCourseById = async (req, res) => {
 };
 
 // export default { getCourses , getCourseById };
+

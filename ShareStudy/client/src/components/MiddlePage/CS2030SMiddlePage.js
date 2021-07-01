@@ -21,3 +21,4 @@ const MiddlePage = () => {
 };
 
 export default MiddlePage;
+

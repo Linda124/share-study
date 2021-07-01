@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from "redux-devtools-extension";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles.scss';
+
+
 
 import { reducers } from './reducers';
 import App from './App';

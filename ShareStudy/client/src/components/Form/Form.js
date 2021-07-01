@@ -17,23 +17,39 @@ const Form = ({ currentId, setCurrentId}) => {
         if(review) setReviewData(review);
     }, [review])
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if(currentId) {
-            dispatch(updateReview({ ...reviewData, name: user?.result?.name }));
-        } else {
-            dispatch(createReview({ ...reviewData, name: user?.result?.name }));
-        }
-        clear();
-    }
 
     const clear = () => {
         setCurrentId(null);
         setReviewData({ title: '', message: '', tags: '', selectedFile: '' });
         
       };
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+
+    //     if(currentId) {
+    //         dispatch(updateReview({ ...reviewData, name: user?.result?.name }));
+            
+    //     } else {
+    //         dispatch(createReview({ ...reviewData, name: user?.result?.name }));
+    //     }
+    //     clear();
+    // }
+
+    const handleSubmit =  (e) => {
+        e.preventDefault();
     
+        if (currentId) {
+         dispatch(updateReview(currentId, { ...reviewData, name: user?.result?.name }));
+          clear();
+        } else {
+          dispatch(createReview({ ...reviewData, name: user?.result?.name }));
+          clear();
+        }
+    };
+
+
+
       if (!user?.result?.name) {
         return (
           <Paper className={classes.paper}>
